@@ -8,7 +8,7 @@ import static com.binarysanctuary.commons.coreext.Array.$;
 
 public class ArrayTest {
     @DataProvider
-    public Object[][] itShouldShiftTheArray() {
+    public Object[][] itShouldShiftRightAnArrayStartingFromGivenIndex() {
         return new Object[][] {
                 {$(0, 1, 2, 3, 4, 5), 0, $(0, 0, 1, 2, 3, 4)},
                 {$(0, 1, 2, 3, 4, 5), 1, $(0, 1, 1, 2, 3, 4)},
@@ -19,7 +19,7 @@ public class ArrayTest {
         };
     }
 
-    @Test(dataProvider = "itShouldShiftTheArray")
+    @Test(dataProvider = "itShouldShiftRightAnArrayStartingFromGivenIndex")
     public void itShouldShiftRightAnArrayStartingFromGivenIndex(Object[] array, int idx, Object[] expected) {
         Array.rshift(array, idx);
         Assert.assertEquals(array, expected);
@@ -36,5 +36,23 @@ public class ArrayTest {
     @Test(expectedExceptions = IllegalArgumentException.class, dataProvider = "itShouldThrowIAEWhenRightShiftingAnArray")
     public void itShouldThrowIAEWhenRightShiftingAnArray(Object[] array, int idx) {
         Array.rshift(array, idx);
+    }
+
+    @DataProvider
+    public Object[][] itShouldShiftleftAnArrayStartingFromGivenIndex() {
+        return new Object[][] {
+                {$(0, 1, 2, 3, 4, 5), 0, $(0, 1, 2, 3, 4, 5)},
+                {$(0, 1, 2, 3, 4, 5), 1, $(1, 1, 2, 3, 4, 5)},
+                {$(0, 1, 2, 3, 4, 5), 2, $(1, 2, 2, 3, 4, 5)},
+                {$(0, 1, 2, 3, 4, 5), 3, $(1, 2, 3, 3, 4, 5)},
+                {$(0, 1, 2, 3, 4, 5), 4, $(1, 2, 3, 4, 4, 5)},
+                {$(0, 1, 2, 3, 4, 5), 5, $(1, 2, 3, 4, 5, 5)},
+        };
+    }
+
+    @Test(dataProvider = "itShouldShiftleftAnArrayStartingFromGivenIndex")
+    public void itShouldShiftleftAnArrayStartingFromGivenIndex(Object[] array, int idx, Object[] expected) {
+        Array.lshift(array, idx);
+        Assert.assertEquals(array, expected);
     }
 }
