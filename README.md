@@ -1,3 +1,3 @@
-# Commons
+# BinarySanctuary Commons
 
-Common, utility library.
+Common, utility library for Java.
